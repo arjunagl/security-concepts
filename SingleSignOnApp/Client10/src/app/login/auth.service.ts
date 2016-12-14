@@ -48,7 +48,7 @@ export class Auth {
                 // regular login
                 // that.auth0.logout();
                 localStorage.removeItem('id_token');
-                localStorage.removeItem('profile');
+                // localStorage.removeItem('profile');
                 console.log('Client 1 - SSO Session is not active');
             }
         });
@@ -76,7 +76,7 @@ export class Auth {
         // Remove token from localStorage
         this.auth0.logout();
         localStorage.removeItem('id_token');
-        let logoutUrl = `https://arjuna.au.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost%3A4201&client_id=${myConfig.clientID}`
+        let logoutUrl = `https://arjuna.au.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost%3A4201&client_id=${myConfig.clientID}`;
         window.location.href = logoutUrl;
     };
 }
