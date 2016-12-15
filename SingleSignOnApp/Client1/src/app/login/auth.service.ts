@@ -19,14 +19,7 @@ export class Auth {
     constructor() {
         // Add callback for lock `authenticated` event
         this.lock.on('authenticated', (authResult) => {
-            this.lock.getProfile(authResult.idToken, function (error, profile) {
-                if (error) {
-                    console.log(error);
-                    return;
-                }
-                localStorage.setItem('id_token', authResult.idToken);
-                localStorage.setItem('profile', JSON.stringify(profile));
-            });
+            this.setProfile(authResult);
         });
 
         let that = this;
@@ -42,9 +35,12 @@ export class Auth {
                 // there is! redirect to Auth0 for SSO
                 that.auth0.signin({
                     connection: data.lastUsedConnection.name,
-                    scope: 'openid name picture'
+                    scope: 'openid name picture',
+                    popup: true
+                }, (err, authResult) => {
+                    that.setProfile(authResult);
                 });
-            } else {                
+            } else {
                 // regular login
                 // that.auth0.logout();
                 localStorage.removeItem('id_token');
@@ -77,5 +73,16 @@ export class Auth {
         localStorage.removeItem('id_token');
         let logoutUrl = `https://arjuna.au.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost%3A4200&client_id=${myConfig.clientID}`;
         window.location.href = logoutUrl;
+    };
+
+    public setProfile(authResult) {
+        this.lock.getProfile(authResult.idToken, function (error, profile) {
+            if (error) {
+                console.log(error);
+                return;
+            }
+            localStorage.setItem('id_token', authResult.idToken);
+            localStorage.setItem('profile', JSON.stringify(profile));
+        });
     };
 }
