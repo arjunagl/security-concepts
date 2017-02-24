@@ -1,7 +1,7 @@
 <script src="http://cdn.auth0.com/js/lock/10.7/lock.min.js"></script>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-    <div class="navbar-header">      
+    <div class="navbar-header">
       <button class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
       <button class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
     </div>
@@ -10,5 +10,7 @@
 <div>
   Authenticated = {{auth.authenticated()}}
   <br/>
-  <label *ngIf="auth.authenticated()">{{auth.getUserProfile().email}}</label>
+  <p *ngIf="auth.authenticated()">{{auth.getUserProfile().email}} <br/>
+    <button (click)="redirectToRegister()">Update Profile</button>
+  </p>
 </div>

@@ -14,4 +14,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  redirectToRegister() {
+    alert('Should redirect to a different page');
+    window.location.href = 'http://localhost:4201';
+  }
+
 }

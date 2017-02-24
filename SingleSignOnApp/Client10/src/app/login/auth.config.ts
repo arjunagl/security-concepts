@@ -4,6 +4,6 @@ interface AuthConfiguration {
 }
 
 export const myConfig: AuthConfiguration = {
-    clientID: 'Rx1QFE5LuST3oJdIph9tTYuCrgWw3eWj',
-    domain: 'arjuna.au.auth0.com'
+    clientID: 'J4iLvaNQXZSdsbYiE405vAQitGXmGUga',
+    domain: 'arjunagl.auth0.com'
 };
